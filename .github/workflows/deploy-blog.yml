@@ -1,6 +1,6 @@
-######################################################################################################
-# This workflow installs Hugo and builds for my Blog once change is merged to the main branch
-######################################################################################################
+#######################################################################################################################
+# This workflow install's Hugo and build artifact for my Blog Deployment to S3 once change is merged to the main branch
+#######################################################################################################################
 
 name: Deployment of blog release to S3 in Development Account
 
@@ -8,10 +8,28 @@ on:
   push:
     branches:
       - main
+      
+# Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to S3
+permissions:
+    contents: read
+    id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest   #Uses Ubuntu VM as a runner
+
+
+# Enviroment Secrets for a AWS credentials for deployment
+    env:
+      AWS_REGION: ${{ secrets.AWS_REGION}}
+      AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME}}
+      AWS_IAM_ROLE: ${{ secrets.AWS_IAM_ROLE}}
+      CFD_ID: ${{ secrets.CFD_ID}}
+
+# Performs Checkout Action for Pre-built configuration operation to checkout repo code into runner
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
@@ -19,6 +37,7 @@ jobs:
         submodules: true
         fetch-depth: 0
 
+# Installs Install -> Build -> Upload Hugo artifact with the defined action
     - name: Installs Hugo
       uses: peaceiris/actions-hugo@v3
       with:
@@ -33,3 +52,19 @@ jobs:
       with:
        name: tech-blog
        path: public/*
+
+# AWS IAM assume role Credentials to S3 sync operation & Flushing Cloud Front Cache via CLI
+
+    - name: Configure AWS credentials from AWS account
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        audience: sts.amazonaws.com
+        role-to-assume: ${{ secrets.AWS_IAM_ROLE}}
+        aws-region: ${{ secrets.AWS_REGION}}
+
+    - name: Sync Blog Content to S3 Bucket
+      run: aws s3 sync ./public/ s3://${{ secrets.AWS_BUCKET_NAME }} --delete
+
+    - name: Flush Invalidation of CloudFront Cache
+      run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CFD_ID}} --paths "/*"
+      
