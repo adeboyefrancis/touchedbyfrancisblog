@@ -1,0 +1,35 @@
+######################################################################################################
+# This workflow installs Hugo and builds for my Blog once change is merged to the main branch
+######################################################################################################
+
+name: Deployment of blog release to S3 in Development Account
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest   #Uses Ubuntu VM as a runner
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+        fetch-depth: 0
+
+    - name: Installs Hugo
+      uses: peaceiris/actions-hugo@v3
+      with:
+        hugo-version: '0.135.0'
+        extended: true
+
+    - name: Build
+      run: hugo
+
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+       name: tech-blog
+       path: public/*
