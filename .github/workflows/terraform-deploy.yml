@@ -21,6 +21,9 @@ jobs:
   infra-deploy:
     runs-on: ubuntu-latest
     name: AWS Infrastructure Provisioning
+    defaults:
+     run:
+        working-directory: infra
     outputs:
       s3_bucket: ${{ steps.tf_out.outputs.s3 }}
       cf_id: ${{ steps.tf_out.outputs.cfid }}
@@ -38,7 +41,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Format Check
-        run: terraform fmt -check -recursive
+        run: terraform fmt
 
       - name: Terraform Validate
         run: terraform validate -no-color

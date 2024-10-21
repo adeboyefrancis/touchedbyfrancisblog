@@ -27,5 +27,26 @@ resource "aws_s3_bucket_website_configuration" "blog-static-config" {
 
 resource "aws_s3_bucket_policy" "s3-cf-bucket-policy" {
   bucket = aws_s3_bucket.blog-bucket.id
-  policy = file("infra/IAM/s3-bucket-policy.tpl")
+  policy = <<EOF
+{
+    "Version": "2008-10-17",
+    "Id": "PolicyForCloudFrontPrivateContent",
+    "Statement": [
+        {
+            "Sid": "AllowCloudFrontServicePrincipal",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudfront.amazonaws.com"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "${aws_s3_bucket.blog-bucket.arn}/*",
+            "Condition": {
+                "StringEquals": {
+                    "AWS:SourceArn": "arn:aws:cloudfront::911167905602:distribution/${aws_cloudfront_distribution.s3_distribution.id}"
+                }
+            }
+        }
+    ]
+}
+EOF
 }
