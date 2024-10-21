@@ -7,11 +7,6 @@ resource "aws_s3_bucket" "blog-bucket" {
 
 }
 
-resource "aws_s3_bucket_acl" "access-block" {
-  bucket = aws_s3_bucket.blog-bucket.id
-  acl    = "private"
-}
-
 resource "aws_s3_bucket_website_configuration" "blog-static-config" {
   bucket = aws_s3_bucket.blog-bucket.id
 
