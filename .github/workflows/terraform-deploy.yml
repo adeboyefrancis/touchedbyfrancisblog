@@ -1,0 +1,32 @@
+name: Terraform Deployment of Blog release to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+
+  workflow_dispatch:
+
+
+permissions:
+    contents: read
+    id-token: write
+  
+
+env:
+  AWS_REGION : ${{ secrets.AWS_REGION }}
+  TF_CLOUD_API_TOKEN : ${{ secrets.TF_CLOUD_API_TOKEN }}
+  AWS_IAM_ROLE: ${{ secrets.AWS_IAM_ROLE }}
+
+
+jobs:
+  infra-deploy:
+    runs-on: ubuntu-latest 
+    name: AWS Infrastructure Provisioning with Terraform
+    defaults:
+        run:
+         working-directory: terraform
+    
+
+  
