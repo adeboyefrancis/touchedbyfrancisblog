@@ -14,17 +14,17 @@ terraform {
 ##############################################
 # Terraform Cloud Remote Backend Configuration
 ##############################################
+terraform { 
+  cloud { 
+    
+    organization = "touchedbyfrancisblog" 
 
-terraform {
-  backend "remote" {
-    hostname = "app.terraform.io"
-    organization = "touchedbyfrancisblog"
-
-    workspaces {
-      name = "touchedbyfrancis"
-    }
-  }
+    workspaces { 
+      name = "touchedbyfrancis" 
+    } 
+  } 
 }
+
 
 ##############################################
 # Resource Tagging
