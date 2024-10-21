@@ -14,23 +14,24 @@ terraform {
 ##############################################
 # Terraform Cloud Remote Backend Configuration
 ##############################################
+terraform { 
+  cloud { 
+    
+    organization = "touchedbyfrancisblog" 
 
-terraform {
-  backend "remote" {
-    hostname = "app.terraform.io"
-    organization = "touchedbyfrancisblog"
-
-    workspaces {
-      name = "touchedbyfrancis"
-    }
-  }
+    workspaces { 
+      name = "touchedbyfrancis" 
+    } 
+  } 
 }
+
 
 ##############################################
 # Resource Tagging
 ##############################################
 provider "aws" {
-  region  = "${var.region}"
+  region  = "eu-west-1"
+  alias = "eu-west-1"
 
   default_tags {
     tags = {

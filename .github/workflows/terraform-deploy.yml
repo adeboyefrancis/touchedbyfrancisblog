@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     name: AWS Infrastructure Provisioning
     defaults:
-     run:
+      run:
         working-directory: infra
     outputs:
       s3_bucket: ${{ steps.tf_out.outputs.s3 }}
