@@ -15,7 +15,7 @@ env:
   TF_CLOUD_API_TOKEN: ${{ secrets.TF_CLOUD_API_TOKEN }}
   AWS_IAM_ROLE: ${{ secrets.AWS_IAM_ROLE }}
   TF_HOSTNAME: ${{ secrets.TF_HOSTNAME }}
-  TF_AWS_ROLE_ARN: ${{ secrets.TF_AWS_ROLE_ARN }}
+  
 
 jobs:
   infra-deploy:
@@ -35,7 +35,7 @@ jobs:
       - name: Configure AWS Credentials for Terraform
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.TF_AWS_ROLE_ARN }}
+          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Setup Terraform
