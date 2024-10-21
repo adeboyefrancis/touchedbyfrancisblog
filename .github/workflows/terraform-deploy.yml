@@ -1,32 +1,108 @@
-name: Terraform Deployment of Blog release to AWS
+name: Terraform Deployment and Blog Build
 
 on:
   push:
     branches:
       - main
 
-
   workflow_dispatch:
 
-
 permissions:
-    contents: read
-    id-token: write
-  
+  contents: read
+  id-token: write
 
 env:
-  AWS_REGION : ${{ secrets.AWS_REGION }}
-  TF_CLOUD_API_TOKEN : ${{ secrets.TF_CLOUD_API_TOKEN }}
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  TF_CLOUD_API_TOKEN: ${{ secrets.TF_CLOUD_API_TOKEN }}
   AWS_IAM_ROLE: ${{ secrets.AWS_IAM_ROLE }}
 
-
 jobs:
+  # Provision infrastructure with Terraform
   infra-deploy:
-    runs-on: ubuntu-latest 
-    name: AWS Infrastructure Provisioning with Terraform
-    defaults:
-        run:
-         working-directory: terraform
-    
+    runs-on: ubuntu-latest
+    name: AWS Infrastructure Provisioning
+    outputs:
+      s3_bucket: ${{ steps.tf_out.outputs.s3 }}
+      cf_id: ${{ steps.tf_out.outputs.cfid }}
+      cf_domain_name: ${{ steps.tf_out.outputs.cfdomain }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-  
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_CLOUD_API_TOKEN }}
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        run: terraform plan -no-color
+
+      - name: Terraform Apply
+        run: terraform apply --auto-approve
+
+      - name: Terraform Output (JSON)
+        id: tf_out
+        run: terraform output -json > terraform_output.json
+
+  # Build the blog content using Hugo
+  build-job:
+    runs-on: ubuntu-latest
+    name: Build Blog
+    needs: [infra-deploy]
+    steps:
+      - name: Checkout Repository (with submodules)
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Install Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.135.0'
+          extended: true
+
+      - name: Build the Blog
+        run: hugo
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: tech-blog
+          path: public/*
+
+  # Deploy the built blog content to S3 and invalidate CloudFront cache
+  deploy-job:
+    runs-on: ubuntu-latest
+    name: Deploy Blog
+    needs: [infra-deploy, build-job]
+    env:
+      AWS_BUCKET_NAME: ${{ needs.infra-deploy.outputs.s3_bucket }}
+      CFD_ID: ${{ needs.infra-deploy.outputs.cf_id }}
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: tech-blog
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          audience: sts.amazonaws.com
+          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Sync Blog Content to S3 Bucket
+        run: aws s3 sync ./public/ s3://${{ env.AWS_BUCKET_NAME }} --delete
+
+      - name: Invalidate CloudFront Cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ env.CFD_ID }} --paths "/*"
