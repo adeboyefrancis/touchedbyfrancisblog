@@ -15,6 +15,7 @@ env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
   TF_CLOUD_API_TOKEN: ${{ secrets.TF_CLOUD_API_TOKEN }}
   AWS_IAM_ROLE: ${{ secrets.AWS_IAM_ROLE }}
+  TF_HOSTNAME: ${{ secrets.TF_HOSTNAME }}
 
 jobs:
   # Provision infrastructure with Terraform
@@ -37,7 +38,7 @@ jobs:
         with:
           terraform_version: "1.9.7"
           cli_config_credentials_token: ${{ secrets.TF_CLOUD_API_TOKEN }}
-          cli_config_credentials_hostname: app.terraform.io
+          cli_config_credentials_hostname: ${{ secrets.TF_HOSTNAME }}
           terraform_wrapper: true
 
       - name: Terraform Init

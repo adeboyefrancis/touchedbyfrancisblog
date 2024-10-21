@@ -8,24 +8,21 @@ terraform {
       version = "5.72.0"
     }   
   }
-required_version = ">= 1.1.0"
+
 
 }
 
 ##############################################
 # Terraform Cloud Remote Backend Configuration
 ##############################################
-terraform { 
-  cloud { 
-    
-    organization = "touchedbyfrancisblog" 
-
-    workspaces { 
-      name = "touchedbyfrancis" 
-    } 
-  } 
+terraform {
+    backend "remote" {
+        organization = "touchedbyfrancisblog"
+        workspaces {
+            name = "touchedbyfrancis"
+        }
+    }
 }
-
 
 ##############################################
 # Resource Tagging
