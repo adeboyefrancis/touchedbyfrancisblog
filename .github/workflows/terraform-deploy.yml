@@ -106,16 +106,9 @@ jobs:
 
       - name: Sync Blog Content to S3 Bucket
         run: |
-          if ! aws s3 sync ./public/ s3://${{ env.AWS_BUCKET_NAME }} --delete; then
-            echo "S3 sync failed"
-            exit 1
-          fi
+          aws s3 sync . s3://${{ env.AWS_BUCKET_NAME }} --delete
 
       - name: Invalidate CloudFront Cache
         run: |
-          if ! aws cloudfront create-invalidation --distribution-id ${{ env.CFD_ID }} --paths "/*"; then
-            echo "CloudFront invalidation failed"
-            exit 1
-          fi
+          aws cloudfront create-invalidation --distribution-id ${{ env.CFD_ID }} --paths "/*"
 
-          
