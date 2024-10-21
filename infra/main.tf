@@ -31,7 +31,7 @@ terraform {
 # Resource Tagging
 ##############################################
 provider "aws" {
-  region  = "eu-west-1"
+  region  = var.region
   alias = "eu-west-1"
 
   default_tags {
