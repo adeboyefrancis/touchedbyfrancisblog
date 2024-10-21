@@ -8,6 +8,7 @@ terraform {
       version = "5.72.0"
     }   
   }
+required_version = ">= 1.1.0"
 
 }
 
@@ -44,4 +45,3 @@ provider "aws" {
   }
 }
 
-data "aws_region" "current" {} #import data from aws
