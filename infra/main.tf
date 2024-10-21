@@ -22,7 +22,7 @@ terraform {
     organization = "touchedbyfrancisblog"
 
     workspaces {
-      name = "touchedbyfrancisblog"
+      name = "touchedbyfrancis"
     }
   }
 }
