@@ -1,6 +1,6 @@
-#####################
-# AWS Cloud Provider
-#####################
+#############################################
+# Terraform Provider Block
+#############################################
 terraform {
   required_providers {
     aws = {
@@ -9,36 +9,29 @@ terraform {
     }   
   }
 
-
-}
-
-##############################################
-# Terraform Cloud Remote Backend Configuration
-##############################################
-terraform {
-    backend "remote" {
-        organization = "touchedbyfrancisblog"
-        workspaces {
-            name = "touchedbyfrancis"
-        }
-    }
-}
-
-##############################################
-# Resource Tagging
-##############################################
-provider "aws" {
-  region  = var.region
-  alias = "eu-west-1"
-
-  default_tags {
-    tags = {
-      
-      Project     = var.project
-      Contact     = var.contact
-      Environment = terraform.workspace
-      ManageBy    = "Terraform/deploy"
+#############################################
+# Terraform Cloud Backend Configuration
+#############################################
+  backend "remote" {
+    organization = "touchedbyfrancisblog"
+    workspaces {
+      name = "touchedbyfrancis"
     }
   }
 }
 
+#############################################
+# AWS Provider Block
+#############################################
+provider "aws" {
+  region = var.region
+
+  default_tags {
+    tags = {
+      Project     = var.project
+      Contact     = var.contact
+      Environment = terraform.workspace
+      ManagedBy   = "Terraform"
+    }
+  }
+}

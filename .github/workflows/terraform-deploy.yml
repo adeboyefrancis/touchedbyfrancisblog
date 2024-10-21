@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-
   workflow_dispatch:
 
 permissions:
@@ -16,9 +15,9 @@ env:
   TF_CLOUD_API_TOKEN: ${{ secrets.TF_CLOUD_API_TOKEN }}
   AWS_IAM_ROLE: ${{ secrets.AWS_IAM_ROLE }}
   TF_HOSTNAME: ${{ secrets.TF_HOSTNAME }}
+  TF_AWS_ROLE_ARN: ${{ secrets.TF_AWS_ROLE_ARN }}
 
 jobs:
-  # Provision infrastructure with Terraform
   infra-deploy:
     runs-on: ubuntu-latest
     name: AWS Infrastructure Provisioning
@@ -31,7 +30,13 @@ jobs:
       cf_domain_name: ${{ steps.tf_out.outputs.cfdomain }}
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials for Terraform
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.TF_AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -45,7 +50,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Format Check
-        run: terraform fmt
+        run: terraform fmt -check
 
       - name: Terraform Validate
         run: terraform validate -no-color
@@ -60,14 +65,13 @@ jobs:
         id: tf_out
         run: terraform output -json > terraform_output.json
 
-  # Build the blog content using Hugo
   build-job:
     runs-on: ubuntu-latest
     name: Build Blog
     needs: [infra-deploy]
     steps:
       - name: Checkout Repository (with submodules)
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
           fetch-depth: 0
@@ -87,7 +91,6 @@ jobs:
           name: tech-blog
           path: public/*
 
-  # Deploy the built blog content to S3 and invalidate CloudFront cache
   deploy-job:
     runs-on: ubuntu-latest
     name: Deploy Blog
@@ -104,12 +107,19 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          audience: sts.amazonaws.com
           role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Sync Blog Content to S3 Bucket
-        run: aws s3 sync ./public/ s3://${{ env.AWS_BUCKET_NAME }} --delete
+        run: |
+          if ! aws s3 sync ./public/ s3://${{ env.AWS_BUCKET_NAME }} --delete; then
+            echo "S3 sync failed"
+            exit 1
+          fi
 
       - name: Invalidate CloudFront Cache
-        run: aws cloudfront create-invalidation --distribution-id ${{ env.CFD_ID }} --paths "/*"
+        run: |
+          if ! aws cloudfront create-invalidation --distribution-id ${{ env.CFD_ID }} --paths "/*"; then
+            echo "CloudFront invalidation failed"
+            exit 1
+          fi
