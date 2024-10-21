@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     name: AWS Infrastructure Provisioning
     defaults:
-     run:
+      run:
         working-directory: infra
     outputs:
       s3_bucket: ${{ steps.tf_out.outputs.s3 }}
@@ -31,6 +31,13 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          audience: sts.amazonaws.com
+          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
