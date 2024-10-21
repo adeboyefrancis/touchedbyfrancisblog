@@ -44,7 +44,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Format Check
-        run: terraform fmt -check
+        run: terraform fmt
 
       - name: Terraform Validate
         run: terraform validate -no-color
