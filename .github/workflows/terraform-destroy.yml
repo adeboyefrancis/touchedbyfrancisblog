@@ -21,6 +21,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Empty S3 bucket
+        run: aws s3 rm s3://${{ inputs.s3_bucket }} --recursive
+
       - name: Terraform Workflow
         uses: hashicorp/setup-terraform@v3
         with:
@@ -39,6 +48,3 @@ jobs:
         id: destroy
         run: terraform destroy -auto-approve
         continue-on-error: true
-
-      - name: Empty S3 bucket
-        run: aws s3 rm s3://${{ inputs.s3_bucket }} --recursive
