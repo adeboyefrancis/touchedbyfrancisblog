@@ -108,7 +108,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Sync Blog Content to S3 Bucket
-        run: aws s3 sync . s3://${{env.AWS_BUCKET_NAME}} \ --delete
+        run: aws s3 sync . s3://${{env.AWS_BUCKET_NAME}} --delete
 
       - name: Invalidate CloudFront Cache
         run: aws cloudfront create-invalidation --distribution-id ${{env.CFD_ID}} --paths "/*"
