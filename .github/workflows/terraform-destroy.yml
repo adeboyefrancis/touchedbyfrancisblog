@@ -3,13 +3,12 @@ name: Terraform Destroy
 on:
   workflow_dispatch:
     inputs:
-        s3_bucket:
-            type: string
-            description: Enter Bucket Name
+      s3_bucket:
+        type: string
+        description: Enter Bucket Name
 
 env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
-  
 
 jobs:
   cleanup_job:
@@ -19,10 +18,6 @@ jobs:
       run:
         working-directory: infra
     steps:
-
-      - name: Empty S3 bucket
-        run: aws s3 rm s3://${{ inputs.s3_bucket }} --recursive
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -44,3 +39,6 @@ jobs:
         id: destroy
         run: terraform destroy -auto-approve
         continue-on-error: true
+
+      - name: Empty S3 bucket
+        run: aws s3 rm s3://${{ inputs.s3_bucket }} --recursive
