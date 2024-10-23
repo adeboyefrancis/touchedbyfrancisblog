@@ -3,10 +3,6 @@ name: Terraform Destroy
 on:
   workflow_dispatch:
 
-permissions:
-  contents: read
-  id-token: write
-
 env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
   
@@ -19,11 +15,6 @@ jobs:
       run:
         working-directory: infra
     steps:
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
-          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Get bucket name
         id: get_bucket
