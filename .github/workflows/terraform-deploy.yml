@@ -55,9 +55,12 @@ jobs:
       - name: Terraform Apply
         run: terraform apply --auto-approve
 
-      - name: Terraform Output (JSON)
+      - name: Terraform Output
         id: tf_out
-        run: terraform output -json > terraform_output.json
+        run: |
+          echo "s3=$(terraform output s3_bucket | tr -d '""')" >> "$GITHUB_OUTPUT"
+          echo "cfid=$(terraform output cf_id | tr -d '""')" >> "$GITHUB_OUTPUT"
+          echo "domain=$(terraform output cf_domain_name | tr -d '""')" >> "$GITHUB_OUTPUT"
 
   build-job:
     runs-on: ubuntu-latest
