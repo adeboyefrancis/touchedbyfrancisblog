@@ -94,7 +94,7 @@ jobs:
     needs: [infra-deploy, build-job]
     env:
       AWS_BUCKET_NAME: ${{ needs.infra-deploy.outputs.s3_bucket }}
-      CFD_ID: ${{ needs.infra-deploy.outputs.cf_id }}
+      CFD_ID: ${{ needs.infra-deploy.outputs.cfid }}
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
