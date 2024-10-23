@@ -1,55 +1,39 @@
 name: Terraform Destroy
 
-on:
-  workflow_dispatch:
+on: 
+    workflow_dispatch:
 
-    inputs:
-      s3_bucket:
-        type: string
-        description: Enter Bucket Name
-
-permissions:
-  contents: read
-  id-token: write
 
 env:
-  AWS_REGION: ${{ secrets.AWS_REGION }}
+  AWS_REGION : ${{ secrets.AWS_REGION }}
 
 jobs:
-  cleanup_job:
-    name: Clean-Up Resources
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: infra
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+    cleanup_job:
+        name: Clean-Up
+        runs-on: ubuntu-latest
+        defaults:
+          run:
+            working-directory: infra
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
-          aws-region: ${{ env.AWS_REGION }}
+            - name: Terraform Workflow
+              uses: hashicorp/setup-terraform@v3
+              with:
+                terraform_version: "1.9.7"
+                cli_config_credentials_token: ${{ secrets.TF_CLOUD_API_TOKEN }} 
 
-      - name: Empty S3 bucket
-        run: aws s3 rm s3://${{ inputs.s3_bucket }} --recursive
+            - name: Terraform Init
+              id: init
+              run: terraform init
 
-      - name: Terraform Workflow
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.9.7"
-          cli_config_credentials_token: ${{ secrets.TF_CLOUD_API_TOKEN }}
+            - name: Terraform PLan
+              id: plan
+              run: terraform plan
+              continue-on-error: true
 
-      - name: Terraform Init
-        id: init
-        run: terraform init
-
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan
-
-      - name: Terraform Destroy
-        id: destroy
-        run: terraform destroy -auto-approve
-        continue-on-error: true
+            - name: Terraform Destroy
+              id: destroy
+              run: terraform destroy -auto-approve
+              continue-on-error: true
