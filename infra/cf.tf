@@ -73,5 +73,5 @@ resource "aws_cloudfront_function" "cf_function" {
   runtime = "cloudfront-js-2.0"
   comment = "redirect incoming traffic to index.html"
   publish = true
-  code    = file("code/function.js")
+  code    = file("code/cf_function.js")
 }
