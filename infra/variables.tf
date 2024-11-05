@@ -21,10 +21,17 @@ variable "tech-blog" {
 }
 
 variable "region" {
+  description = "Primary resource region"
   default = "eu-west-1"
 
 }
 variable "s3_name" {
   type = string
   default = "touchedbyfrancis.cloud"
+}
+
+
+provider "aws" {
+  alias   = "us_east_1"
+  region  = "us-east-1"
 }

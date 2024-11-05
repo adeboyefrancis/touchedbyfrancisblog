@@ -1,7 +1,13 @@
 #################################################################
 # request public certificates from the amazon certificate manager.
 #################################################################
+provider "aws" {
+  alias  = "us_east_1"
+  region = "us-east-1"
+}
+
 resource "aws_acm_certificate" "acm_certificate" {
+  provider = aws.us_east_1
   domain_name               = "touchedbyfrancis.cloud"
   subject_alternative_names = ["*.touchedbyfrancis.cloud"]
   validation_method         = "DNS"
