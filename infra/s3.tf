@@ -37,7 +37,7 @@ resource "aws_s3_bucket_policy" "s3-cf-bucket-policy" {
             "Resource": "${aws_s3_bucket.blog-bucket.arn}/*",
             "Condition": {
                 "StringEquals": {
-                    "AWS:SourceArn": "arn:aws:cloudfront::911167905602:distribution/${aws_cloudfront_distribution.s3_distribution.id}"
+                    "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/${aws_cloudfront_distribution.s3_distribution.id}"
                 }
             }
         }
