@@ -4,7 +4,7 @@
 
 
 resource "aws_acm_certificate" "acm_certificate" {
-  provider = aws.us_east_1
+  provider = aws.us-east-1
   domain_name               = "touchedbyfrancis.cloud"
   subject_alternative_names = ["*.touchedbyfrancis.cloud"]
   validation_method         = "DNS"
