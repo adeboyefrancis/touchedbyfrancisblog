@@ -9,9 +9,9 @@ terraform {
     }   
   }
 
-#############################################
-# Terraform Cloud Backend Configuration
-#############################################
+  #############################################
+  # Terraform Cloud Backend Configuration
+  #############################################
   backend "remote" {
     organization = "touchedbyfrancisblog"
     workspaces {
@@ -21,7 +21,7 @@ terraform {
 }
 
 #############################################
-# AWS Provider Block
+# AWS Provider Block for eu-west-1 (Primary Region)
 #############################################
 provider "aws" {
   region = var.region
@@ -34,4 +34,12 @@ provider "aws" {
       ManagedBy   = "Terraform"
     }
   }
+}
+
+#############################################
+# AWS Provider Block for us-east-1 (Secondary Region)
+#############################################
+provider "aws" {
+  alias  = "us-east-1"
+  region = "us-east-1"
 }
