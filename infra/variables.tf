@@ -29,3 +29,9 @@ variable "s3_name" {
   type = string
   default = "touchedbyfrancis.cloud"
 }
+
+variable "domain_name" {
+  type = string
+  default = "touchedbyfrancis.cloud"
+  
+}
