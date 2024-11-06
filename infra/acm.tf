@@ -46,7 +46,7 @@ resource "aws_route53_record" "route53_valid" {
 #############################################
 
 resource "aws_route53_record" "records_for_cf" {
-  zone_id = data.aws_route53_zone.zone.zone_id
+  zone_id = data.aws_route53_zone.route53_zone.zone_id
   name    = var.domain_name
   type    = "A"
 
@@ -60,7 +60,7 @@ resource "aws_route53_record" "records_for_cf" {
 }
 
 resource "aws_route53_record" "records_for_cf_www" {
-  zone_id = data.aws_route53_zone.zone.zone_id
+  zone_id = data.aws_route53_zone.route53_zone.zone_id
   name    = "www.${var.domain_name}"
   type    = "A"
 
