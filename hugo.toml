@@ -192,9 +192,9 @@ theme = "LoveIt"
       # URL of avatar shown in home page (LINK_TO_YOUR_PHOTO_BELOW)
       avatarURL = "https://media.licdn.com/dms/image/v2/D4E03AQEoagHxF-5zBQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1721065846676?e=1734566400&v=beta&t=kGvw2sYaOy7F1x-TfR6nDD-eYaiInOd8cFFGlAQW22s"
       #  title shown in home page (HTML format is supported)
-      title = "Francis Adeboye Blog"
+      title = "Francis Adeboye"
       # subtitle shown in home page
-      subtitle = "My AWS DevOps Engineering Journey"
+      subtitle = " Navigating the Cloud ☁️ -> Code 🧑🏽‍💻 -> Create ♾️ -> Conquer 🔨"
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
@@ -213,16 +213,16 @@ theme = "LoveIt"
   # Social config about the author
   [params.social]
     Bitbucket = ""
-    GitHub = ""
+    GitHub = "https://github.com/adeboyefrancis"
     Linkedin = "www.linkedin.com/in/francis-a-adeboye"
     Twitter = ""
-    Gitlab = ""
-    Email = ""
+    Gitlab = "https://gitlab.com/adeboye.francis"
+    Email = "adeboye.francis@icloud.com"
     Instagram = ""
     Slidershare = ""
     Goodreads = ""
     Stackoverflow = ""
-    Medium = ""
+    Medium = "https://t.co/y0mvF5LNIx"
     Matrix = ""
     Hackernews = ""
     Soundcloud = ""
