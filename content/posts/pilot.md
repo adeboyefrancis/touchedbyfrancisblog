@@ -1,6 +1,6 @@
 +++
 title = "The Pilot 👨🏽‍✈️🌍✈️ -> Setting Up a Secure and Scalable AWS Environment with Control Tower"
-date = 2024-10-07T23:45:27+02:00
+date = 2024-10-07
 author = "Francis Adeboye"
 draft = false
 tags = ["IAM", "LandingZone", "Control Tower", "Account Factory", "OU" , "Development"]
