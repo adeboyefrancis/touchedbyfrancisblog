@@ -19,6 +19,8 @@ Two alias email addresses were created for **Log Archives** and **Audit**, ensur
 # Landing Zones and Account Management
 New **Landing Zones** were set up under the main AWS account, with a dedicated email address for efficient management of accounts.
 
+![Landing Zone](https://github.com/user-attachments/assets/64d52b7e-15f6-460d-9b0e-7dfef42e15ba)
+
 
 # Organizational Units (OUs)
 I established two **OUs**—**Security** and **Sandbox**—to segregate workloads. In total, three multi-accounts were created: **Management**, **Log**, and **Archive** for more organized account management.
