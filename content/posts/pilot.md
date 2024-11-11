@@ -7,13 +7,13 @@ tags = ["IAM", "LandingZone", "Control Tower", "Account Factory", "OU" , "Develo
 categories = ["Docs"]
 +++
 
+![Control Tower](https://github.com/user-attachments/assets/64d52b7e-15f6-460d-9b0e-7dfef42e15ba)
 Let me share my experience implementing **AWS Control Tower** to establish a secure and compliant multi-account AWS environment. If you're looking to set up proper workload isolation and centralized management, this guide will walk you through the key components. <!--more-->
 
 
 ### Control Tower Implementaion
 Setting up **AWS Control Tower** created the foundation, establishing **Landing Zones** that organize workloads across multiple AWS accounts. I found this structure particularly effective in providing clear boundaries and simplified management for cloud infrastructure.
 
-![Control Tower](https://github.com/user-attachments/assets/64d52b7e-15f6-460d-9b0e-7dfef42e15ba)
 
 ### Landing Zones and Account Management
 One of the first tasks was configuring dedicated email aliases for both **Log Archives** and **Audit accounts**. I then established **Landing Zones** under the main AWS account, which created a clean hierarchical structure for easier administration.
