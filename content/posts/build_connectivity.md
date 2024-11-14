@@ -45,7 +45,7 @@ In the context of a VPC, RAM ensures that **shared resources are accessible only
 
 - **Isolation**: VPCs isolate business-critical resources from public internet threats, similar to a private hotel room where only authorized guests have access.
 
-- **Controlled Access**: Gateways like **Internet Gateway (IGW) and NAT Gateway** act as controlled access points—much like a hotel's reception—limiting who can enter and exit the private network.
+- **Controlled Access**: Gateways like **Internet Gateway (IGW) and NAT Gateway** act as controlled access points—much like a hotel's reception limiting who can enter and exit the private network.
 
 - **Fine-grained Access Control**: **Resource Access Manager (RAM)** provides the ability to assign specific permissions (or "keys") to different **users, accounts, or organizational units (OUs)**. This ensures that only **authorized individuals can access specific resources**. In this project, RAM enables the sharing of specific subnets with a development account created by Control Tower, similar to a hotel chain selectively sharing certain facilities with another hotel.
   
@@ -53,7 +53,7 @@ In the context of a VPC, RAM ensures that **shared resources are accessible only
 
 - **Cross-Account Collaboration**: RAM enables controlled sharing of resources across different accounts, promoting **collaboration and efficiency** without **compromising security**.
 
-## Conclusion
+### Conclusion
 By combining **VPC** and **RAM**, organizations can establish a **robust security posture, protect their valuable assets in the cloud**, and ensure **efficient collaboration between teams and departments**. In this phase, we achieve this by **sharing subnets from our network infrastructure account with the development account**.
 
 ### Relevant links
@@ -62,3 +62,5 @@ By combining **VPC** and **RAM**, organizations can establish a **robust securit
 [Amazon Virtual Private Cloud (VPC)](https://aws.amazon.com/vpc/)
 
 [Resource Access Manager](https://aws.amazon.com/ram/)
+
+<iframe src="https://giphy.com/embed/EjuelmR5LHY7C" width="480" height="271" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/boys-EjuelmR5LHY7C">via GIPHY</a></p>
