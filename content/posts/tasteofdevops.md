@@ -23,7 +23,7 @@ I began with AWS services as my foundation. I chose **S3** for its **scalable** 
   Using **Hugo** as a static site generator, we implemented an automated build process through **GitHub Actions**. Now, each repository change triggers a rebuild of the blog, keeping it up-to-date with minimal manual intervention.
 
 - **Security Integration**  
-  We set up **IAM Identity Provider** with OpenID Connect (OIDC) to enable secure, temporary access for GitHub workflows. Through **Role-Based Access Control (RBAC)** policies, this setup ensures that S3 syncing and CloudFront cache invalidation actions are only performed by authorized GitHub processes.
+  We set up **IAM Identity Provider** with **OpenID Connect (OIDC)** to enable secure, temporary access for GitHub workflows. Through **Role-Based Access Control (RBAC)** policies, this setup ensures that S3 syncing and CloudFront cache invalidation actions are only performed by authorized GitHub processes.
 
 - **Deployment Pipeline**  
   A robust workflow was created to automate the build, deployment, and CloudFront cache management processes upon repository updates. This pipeline not only speeds up deployment but also maintains site performance by managing CloudFront cache invalidation seamlessly.
