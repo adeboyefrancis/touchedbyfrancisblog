@@ -16,9 +16,10 @@ We'll also discuss how this project take a step further by combining VPC & RAM t
 Before we dive into the main agenda, let’s highlight a few key points. For any organization to thrive in today’s fast-paced and constantly evolving digital landscape, **Speed, Agility, and Reliability** are crucial. These factors drive the delivery of successful products, software, value, and services to remain competitive and meet end-user expectations—from the point of inception through continuous improvement, all while adhering to SLAs.
 Essentially, **People, Processes, and Products** must evolve to adapt to change. 
 In this phase we will be focusing on **Continuous Integration with GitHub Action & Delivery of Infrastructure with Terraform**.
+
 ![Service_Value_Chain](https://github.com/user-attachments/assets/9512b437-28a1-4d51-a224-211c04b1f927)
 
-### Why Do We Need VPC and RAM?
+# Why Do We Need VPC and RAM?
 **Virtual Private Cloud (VPC)** is essentially a private network within a public cloud provider, comparable to a private hotel. Just like a hotel has a public lobby, a VPC has a public subnet, typically with an **Internet Gateway (IGW)** and **Network Address Translation (NAT) Gateway**. These gateways act as the hotel's reception, enabling communication with the outside world.
 Within this VPC, resources like **virtual machines (VMs) and databases** are assigned to specific **subnets (private or public)**, depending on their criticality. This is similar to how guests are assigned to rooms on different floors in a hotel. For instance, a subnet might be designated as the "third floor," with **IP addresses** ranging from `10.0.3.0` to `10.0.3.255`.
 Resources within the same subnet can communicate directly, like guests on the same floor using an intercom. However, **Security Groups** act as **virtual firewalls**, ensuring that only **authorized traffic** can flow between resources, even within the same subnet. To access the internet or communicate with resources in other subnets, they must go through the "reception" **(the NAT Gateway or IGW).** This ensures controlled and secure access, similar to how a hotel guest must go through the reception to make an international call.
@@ -29,11 +30,13 @@ By **isolating resources in private subnets** and leveraging **Security Groups**
 **VPC created in Nework-Infrastructure OU Account**
 ![VPC_infrastructure](https://github.com/user-attachments/assets/de69faa3-abbf-4c89-9c3d-40c5ce295dd1)
 
-## Resource Access Manager (RAM)
+# Resource Access Manager
 While a **Virtual Private Cloud (VPC)** provides a secure, private network within a cloud provider, organizations often need to share specific resources, like **subnets or databases**, across different **departments or accounts**. This is where **Resource Access Manager (RAM)** becomes essential. RAM enables controlled sharing of cloud resources between accounts in the same **organization or with trusted external accounts**, without exposing them publicly.
 For example, think of RAM as a secure, private channel between different hotels in the same hotel chain. RAM allows each "hotel" (or department/account) to access certain facilities or resources located in another "hotel" (or VPC), such as a shared dining hall, but with strict access control. By using RAM, organizations can efficiently share specific VPC subnets or other resources with other accounts, while still **maintaining security, reducing complexity**, and avoiding duplicate resources.
 In the context of a VPC, RAM ensures that **shared resources are accessible only to authorized users and can be managed centrally, streamlining resource distribution and improving cost efficiency**. It also facilitates **cross-account collaboration** while maintaining each **VPC's privacy and security settings** as shown below where I share VPC subnets resource created in my **Network OU** with the **Sandbox OU Development** account where applications would be deployed.
+
 ![Shared-Newtork](https://github.com/user-attachments/assets/58bf5fd6-f9d0-44c4-b2fa-24c04486a82f)
+
 
 **Shared Subnets with Development OU Account**
 ![Shared-Subnets](https://github.com/user-attachments/assets/3bab29cb-0850-4bb1-b958-065ca321bc3c)
@@ -50,7 +53,7 @@ In the context of a VPC, RAM ensures that **shared resources are accessible only
 
 - **Cross-Account Collaboration**: RAM enables controlled sharing of resources across different accounts, promoting **collaboration and efficiency** without **compromising security**.
 
-### Conclusion
+## Conclusion
 By combining **VPC** and **RAM**, organizations can establish a **robust security posture, protect their valuable assets in the cloud**, and ensure **efficient collaboration between teams and departments**. In this phase, we achieve this by **sharing subnets from our network infrastructure account with the development account**.
 
 ### Relevant links
