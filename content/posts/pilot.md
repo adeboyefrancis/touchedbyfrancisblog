@@ -7,7 +7,8 @@ tags = ["IAM", "LandingZone", "Control Tower", "Account Factory", "OU" , "Develo
 categories = ["Docs"]
 +++
 
-![Control Tower](https://github.com/user-attachments/assets/64d52b7e-15f6-460d-9b0e-7dfef42e15ba)
+![Landing Zone via Control Tower](https://github.com/user-attachments/assets/a8f62755-fc97-4699-bb17-2686f16c5172)
+)
 Let me share my experience implementing **AWS Control Tower** to establish a secure and compliant multi-account AWS environment. If you're looking to set up proper workload isolation and centralized management, this guide will walk you through the key components. <!--more-->
 
 
