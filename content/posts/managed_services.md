@@ -14,7 +14,7 @@ This process offers significant advantages, including **reduced operational over
 While a full modernization effort might involve other components like **storage optimization with S3 and CloudFront**, this guide focuses specifically on the crucial **database migration process using AWS DMS**, 
 outlining the steps involved and highlighting the benefits of this approach.
 
-## Database Migration to Amazon RDS
+### Database Migration to Amazon RDS
 
 This phase migrates the existing PostgreSQL database to a managed Amazon RDS instance using AWS Database Migration Service (DMS) and Infrastructure as Code (IaC) with Terraform. This approach ensures repeatability and consistency. Key steps include:
 
@@ -40,7 +40,7 @@ This phase migrates the existing PostgreSQL database to a managed Amazon RDS ins
 ![image](https://github.com/user-attachments/assets/f045d123-174d-42ff-8efa-7cc6a208c32a)
 ![image](https://github.com/user-attachments/assets/16b320f6-5f52-4f01-9e97-60f46a812453)
 
-## Storage Optimization with S3 and CloudFront
+### Storage Optimization with S3 and CloudFront
 
 In this phase, I focused on optimizing storage and delivery of static content, specifically user-uploaded images, to improve application performance and scalability. Here's how I achieved this:
 
@@ -100,7 +100,7 @@ In this phase, I focused on optimizing storage and delivery of static content, s
 By implementing these steps, I successfully migrated user-uploaded images to a highly available and scalable storage solution (S3) while leveraging CloudFront's edge network for efficient content delivery, ultimately enhancing the user experience of the application.
 ![synced-image](https://github.com/user-attachments/assets/472bf8f3-8d1f-4ce9-b13d-db347f7c0fd2)
 
-## Configuration Management with Parameter Store
+### Configuration Management with Parameter Store
 
 This phase focused on implementing secure configuration management using AWS Systems Manager Parameter Store. This approach eliminates the need for storing sensitive information directly in code or scripts, enhancing security and reducing the risk of accidental exposure. Here's how I achieved this:
 
@@ -140,7 +140,7 @@ By implementing Parameter Store, this phase significantly enhances security by c
 ![paramstore](https://github.com/user-attachments/assets/1341e55d-911b-4af8-80c1-3634dbf3a0af)
 ![terraform_workspace](https://github.com/user-attachments/assets/b9b60f02-7d77-47a2-a6d6-78114c8c33fe)
 
-## Application Updates
+### Application Updates
 
 This final phase focused on updating the application code to integrate with the AWS services implemented in the previous phases and deploying these changes.
 
@@ -168,7 +168,7 @@ By completing these steps, the application is now fully integrated with the AWS 
 ![new_release](https://github.com/user-attachments/assets/a90faab0-36c5-459b-8d83-d6945929fd47)
 ![image](https://github.com/user-attachments/assets/ee7cb15f-5056-447d-adfc-57d573b0d38b)
 
-## Conclusion
+### Conclusion
 
 This multi-phase migration and modernization effort has significantly improved the application's architecture and operational efficiency. By leveraging AWS managed services, I achieved the following key benefits:
 
@@ -183,7 +183,7 @@ This modernization process not only enhances the application's performance, secu
 
 You can find the complete code for this project on my GitHub repository: [startup-application-v1](https://github.com/adeboyefrancis/startup-application-v1.git).
 
-## Relevant Links
+### Relevant Links
 
 - [Amazon Relational Database Service (RDS)](https://aws.amazon.com/rds/postgresql/)
 - [Amazon Database Migration Service (DMS)](https://aws.amazon.com/dms/)
