@@ -190,7 +190,7 @@ theme = "LoveIt"
       # Gravatar Email for preferred avatar in home page
       gravatarEmail = ""
       # URL of avatar shown in home page (LINK_TO_YOUR_PHOTO_BELOW)
-      avatarURL = "https://media.licdn.com/dms/image/v2/D4E03AQEoagHxF-5zBQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1721065846676?e=1734566400&v=beta&t=kGvw2sYaOy7F1x-TfR6nDD-eYaiInOd8cFFGlAQW22s"
+      avatarURL = "https://media.licdn.com/dms/image/v2/D4E03AQEoagHxF-5zBQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1721065846676?e=1742428800&v=beta&t=EIKiTLze6h-LxH7Yc5HlV43GQOwe9GI1YzleIXdEzWI"
       #  title shown in home page (HTML format is supported)
       title = "Francis Adeboye"
       # subtitle shown in home page
