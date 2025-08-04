@@ -60,11 +60,11 @@ jobs:
       with:
         audience: sts.amazonaws.com
         role-to-assume: ${{ secrets.AWS_IAM_ROLE}}
-        aws-region: ${{ secrets.AWS_REGION}}
+        aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Sync Blog Content to S3 Bucket
-      run: aws s3 sync ./public/ s3://${{ secrets.AWS_BUCKET_NAME }} --delete
+      run: aws s3 sync ./public/ s3://${{secrets.AWS_BUCKET_NAME}} --delete
 
     - name: Flush Invalidation of CloudFront Cache
-      run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CFD_ID}} --paths "/*"
+      run: aws cloudfront create-invalidation --distribution-id ${{secrets.CFD_ID}} --paths "/*"
       
