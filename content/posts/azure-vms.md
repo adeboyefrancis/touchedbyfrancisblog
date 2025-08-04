@@ -1,5 +1,11 @@
-+++ title = "🖥️⚙️ Azure VM Provisioning & Web Server Setup: Linux Nginx and Windows IIS Deployment" date = 2025-01-14 author = 
-"Francis Adeboye" draft = false tags = ["Azure", "Virtual Machine", "Linux", "Windows", "IIS" , "Nginx"] categories = ["Docs"] +++
++++
+title = "🖥️⚙️ Azure VM Provisioning & Web Server Setup: Linux Nginx and Windows IIS Deployment"
+date = 2025-01-14
+author = "Francis Adeboye"
+draft = false
+tags = ["Azure", "Virtual Machine", "Linux", "Windows", "IIS", "Nginx"]
+categories = ["Docs"]
++++
 
 This guide outlines a practical, hands-on task involving the provisioning and configuration of Azure Virtual Machines to host two of the most popular web servers in use today. This is a foundational skill for anyone looking to work with cloud infrastructure.
 
