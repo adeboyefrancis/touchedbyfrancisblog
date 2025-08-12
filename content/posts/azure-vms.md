@@ -309,6 +309,6 @@ az vm delete --name LinuxVM --resource-group WebServer-RG --yes --no-wait
 az group delete --name WebServer-RG --yes --no-wait
 ```
 
-## **🧠 Final Thoughts**
+### **🧠 Final Thoughts**
 Provisioning web servers across different platforms in Azure isn’t just a technical exercise—it’s a blueprint for cloud fluency. By deploying IIS via the portal and NGINX via CLI, you’ve shown how flexible Azure can be for hybrid workflows, real-world scenarios, and secure architecture.
 
