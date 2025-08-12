@@ -1,11 +1,13 @@
 +++
 title = "🖥️⚙️ Azure VM Provisioning & Web Server Setup: Linux Nginx and Windows IIS Deployment"
-date = 2025-01-14
+date = 2025-08-07
 author = "Francis Adeboye"
 draft = false
 tags = ["Azure", "Virtual Machine", "Linux", "Windows", "IIS", "Nginx"]
 categories = ["Docs"]
 +++
+
+![Architectural Diagram](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/s7l545g57hycnar6cwjn.png)
 
 This guide outlines a practical, hands-on task involving the provisioning and configuration of Azure Virtual Machines to host two of the most popular web servers in use today. This is a foundational skill for anyone looking to work with cloud infrastructure.
 
@@ -18,11 +20,6 @@ We'll be setting up two distinct environments to get a feel for managing differe
 1.  **Linux VM with Nginx:** We'll provision a Linux-based virtual machine and configure it to run **Nginx**. Nginx is a lightweight, high-performance web server that is widely used for static sites, reverse proxies, and scalable microservices. You'll learn how to set up and manage a Linux server from scratch.
 
 2.  **Windows VM with IIS:** We'll provision a Windows-based virtual machine and configure it to run **IIS (Internet Information Services)**. As Microsoft's integrated web server, IIS is the go-to choice for hosting .NET applications, enterprise-level solutions, and internal portals. This will give you experience with the Windows Server ecosystem.
-
-
-![Architectural Diagram](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/s7l545g57hycnar6cwjn.png)
-
-
 
 ---
 
